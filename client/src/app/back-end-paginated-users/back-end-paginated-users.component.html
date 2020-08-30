@@ -1,0 +1,40 @@
+<div class="container-fluid mt-3">
+
+    <button type="button" class="btn btn-success mr-3" (click)="onLimitChange()">Get Paginated Users from Back-End</button>
+    <button type="button" class="btn btn-danger mr-3" routerLink="/home" routerLinkActive="active">Go Back to Homepage</button><br><br>
+
+    <div>
+        Enter the number of users to be displayed per page:
+        <input type="text" [(ngModel)]='limit' (change)="onLimitChange()"><br><br>
+    </div>
+    
+    <ul class="pagination" [class.show]="!show">
+      <li class="page-item" #prevItem><a class="page-link" (click)="previous(currentPage-1)">Previous</a></li>
+      <li class="page-item" #page1><a class="page-link" (click)="getPagedUsers(page)">{{ page }}</a></li>
+      <li class="page-item" #page2><a class="page-link" (click)="getPagedUsers(page+1)">{{ page+1 }}</a></li>
+      <li class="page-item" #page3><a class="page-link" (click)="getPagedUsers(page+2)">{{ page+2 }}</a></li>
+      <li class="page-item" #nextItem><a class="page-link" (click)="next(currentPage+1)">Next</a></li>
+    </ul>
+    
+    <table class="table table-striped" *ngIf="show">
+      <thead>
+        <tr>
+          <th>User #</th>
+          <!-- <th>Gender</th> -->
+          <th>Name</th>
+          <!-- <th>Email</th> -->
+          <!-- <th>Picture</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let user of data.results; let i = index">
+          <td>{{ (currentPage-1)*limit + i + 1 }}</td>
+          <!-- <td>{{ user.gender }}</td> -->
+          <td>{{ user.name }}</td>
+          <!-- <td>{{ user.email }}</td> -->
+          <!-- <td><img src="{{ user.picture.medium}}" alt="Picture"></td> -->
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>

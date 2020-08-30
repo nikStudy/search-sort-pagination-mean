@@ -1,0 +1,56 @@
+<div class="container-fluid mt-3">
+    <button type="button" class="btn btn-success mr-3" (click)="getAllUsers()">Get Users</button>
+    <button type="button" class="btn btn-danger mr-3" routerLink="/home" routerLinkActive="active">Go Back to Homepage</button><br><br>
+
+    <h4>Apply search and sort for all data</h4>
+  
+    <p>
+      Search:
+      <input [(ngModel)]="query" (change)="renderview()" />
+    </p>
+    
+    <p>
+      Sort by:
+      <select [(ngModel)]="orderProp" (change)="renderview()">
+        <option value="">Choose...</option>
+        <option value="gender">Gender</option>
+        <option value="first">Name</option>
+        <option value="email">Email</option>
+        <option value="date">Age</option>
+      </select>
+    </p>
+  
+    <span>Total number of users: {{ totalRecords }}</span><br><br>
+    <table class="table table-striped" *ngIf="show">
+      <thead>
+        <tr>
+          <th>User #</th>
+          <th>Gender</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>DOB</th>
+          <th>Picture</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let user of data.results; let i = index">
+        <!-- <tr *ngFor = "let user of getUsers(); let i = index" class="users"> -->
+          <td>{{ (currentPage-1)*limit + i + 1 }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.name.first }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.dob.date }}</td>
+          <td><img src="{{ user.picture.medium}}" alt="Picture"></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <ul class="pagination" [class.show]="!show">
+      <li class="page-item" #prevItem><a class="page-link" (click)="previous(currentPage-1)">Previous</a></li>
+      <li class="page-item" #page1><a class="page-link" (click)="getPagedUsers(page)">{{ page }}</a></li>
+      <li class="page-item" #page2><a class="page-link" (click)="getPagedUsers(page+1)">{{ page+1 }}</a></li>
+      <li class="page-item" #page3><a class="page-link" (click)="getPagedUsers(page+2)">{{ page+2 }}</a></li>
+      <li class="page-item" #nextItem><a class="page-link" (click)="next(currentPage+1)">Next</a></li>
+    </ul>
+  </div>
+  

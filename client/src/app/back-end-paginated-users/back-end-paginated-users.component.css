@@ -1,0 +1,15 @@
+li.disabled {
+    cursor: not-allowed;
+}
+
+li {
+    cursor: pointer;
+}
+
+tr td {
+    height: 30px !important;
+}
+
+.show {
+    visibility: hidden;
+}

@@ -1,0 +1,5 @@
+<div>
+  <app-mainpage *ngIf="router.url == '/home'"></app-mainpage>
+  <router-outlet *ngIf="router.url != '/home'"></router-outlet>
+  
+</div>
